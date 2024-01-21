@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-   <script src="./index.html"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="./js/script.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <header class='text-center '>
         Weather Dashboard
     </header>
     <div class="container d-flex">
-        <section >
-            <div class="d-flex flex-column">
-                <h3>Search for a City</h3>
-                <input class="form-control me-2 mb-2" type="search" placeholder="San Diego" aria-label="Search">
-                <button class="btn btn-outline-success mb-2" type="submit">Search</button>
-            </div>
+        <section>
+            <form id="searchForm">
+                <div class="d-flex flex-column">
+                    <h3>Search for a City</h3>
+                    <input form="searchForm" class="form-control me-2 mb-2" type="search" placeholder="San Diego"
+                        aria-label="Search">
+                    <button form="searchForm" class="btn btn-outline-success mb-2" type="submit">Search</button>
+                </div>
+            </form>
             <hr>
             <div class="d-flex flex-column ">
                 <button class="btn btn-secondary mb-2">Atlanta</button>
@@ -30,7 +36,7 @@
                 <button class="btn btn-secondary mb-2">Austin</button>
             </div>
         </section>
-        <section class="px-4">
+        <section class="px-4 ">
             <div class="card">
                 <h5 class="card-header">
                     Atlanta (9/13/2022)
@@ -43,9 +49,12 @@
                     </ul>
                 </div>
             </div>
-            <h5>5-Day Forecast</h5>
-            <div class="d-flex"> 
-                <div class="card mx-2">
+
+            <h4 class="mt-5">5-Day Forecast</h4>
+
+            <hr>
+            <div class="d-flex">
+                <div class="card">
                     <h5 class="card-header">
                         (9/14/2022)
                     </h5>
@@ -93,7 +102,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card mx-2">
+                <div class="card ">
                     <h5 class="card-header">
                         (9/18/2022)
                     </h5>
@@ -109,6 +118,7 @@
         </section>
     </div>
 
-    
+
 </body>
+
 </html>
