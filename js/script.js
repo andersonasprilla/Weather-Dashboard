@@ -20,6 +20,38 @@ $(document).ready(function () {
         $('#five-day-forecast-temp').addClass("list-group-item");
         $('#five-day-forecast-wind').addClass("list-group-item");
         $('#five-day-forecast-humidity').addClass("list-group-item");
+
+        $('#five-day-forecast-card1').addClass('card mx-2');
+        $('#five-day-forecast-header1').addClass('card-header');
+        $('#five-day-card-body1').addClass('card-body');
+        $('#ul-list-five-day1').addClass('list-group list-group-flush');
+        $('#five-day-forecast-temp1').addClass("list-group-item");
+        $('#five-day-forecast-wind1').addClass("list-group-item");
+        $('#five-day-forecast-humidity1').addClass("list-group-item");
+
+        $('#five-day-forecast-card2').addClass('card mx-2');
+        $('#five-day-forecast-header2').addClass('card-header');
+        $('#five-day-card-body2').addClass('card-body');
+        $('#ul-list-five-day2').addClass('list-group list-group-flush');
+        $('#five-day-forecast-temp2').addClass("list-group-item");
+        $('#five-day-forecast-wind2').addClass("list-group-item");
+        $('#five-day-forecast-humidity2').addClass("list-group-item");
+
+        $('#five-day-forecast-card3').addClass('card mx-2');
+        $('#five-day-forecast-header3').addClass('card-header');
+        $('#five-day-card-body3').addClass('card-body');
+        $('#ul-list-five-day3').addClass('list-group list-group-flush');
+        $('#five-day-forecast-temp3').addClass("list-group-item");
+        $('#five-day-forecast-wind3').addClass("list-group-item");
+        $('#five-day-forecast-humidity3').addClass("list-group-item");
+        
+        $('#five-day-forecast-card4').addClass('card mx-2');
+        $('#five-day-forecast-header4').addClass('card-header');
+        $('#five-day-card-body4').addClass('card-body');
+        $('#ul-list-five-day4').addClass('list-group list-group-flush');
+        $('#five-day-forecast-temp4').addClass("list-group-item");
+        $('#five-day-forecast-wind4').addClass("list-group-item");
+        $('#five-day-forecast-humidity4').addClass("list-group-item");
     }
     
 
@@ -49,11 +81,32 @@ $(document).ready(function () {
             .then(function (fiveDayForecastData) {
 
                 displayFiveDayForecastCard()
-                
+                console.log(fiveDayForecastData)
                 $('#five-day-forecast-header').text(dayjs(fiveDayForecastData.list[2].dt_txt).format('MM/DD/YYYY'))
                 $('#five-day-forecast-temp').text('Temperature: '+ fiveDayForecastData.list[2].main.temp + ' F°')
                 $('#five-day-forecast-wind').text('Wind: ' + fiveDayForecastData.list[2].wind.speed + ' MPH')
                 $('#five-day-forecast-humidity').text('Humidity: ' + fiveDayForecastData.list[2].main.humidity + '%')
+
+                $('#five-day-forecast-header1').text(dayjs(fiveDayForecastData.list[10].dt_txt).format('MM/DD/YYYY'))
+                $('#five-day-forecast-temp1').text('Temperature: '+ fiveDayForecastData.list[10].main.temp + ' F°')
+                $('#five-day-forecast-wind1').text('Wind: ' + fiveDayForecastData.list[10].wind.speed + ' MPH')
+                $('#five-day-forecast-humidity1').text('Humidity: ' + fiveDayForecastData.list[10].main.humidity + '%')
+
+                $('#five-day-forecast-header2').text(dayjs(fiveDayForecastData.list[18].dt_txt).format('MM/DD/YYYY'))
+                $('#five-day-forecast-temp2').text('Temperature: '+ fiveDayForecastData.list[18].main.temp + ' F°')
+                $('#five-day-forecast-wind2').text('Wind: ' + fiveDayForecastData.list[18].wind.speed + ' MPH')
+                $('#five-day-forecast-humidity2').text('Humidity: ' + fiveDayForecastData.list[18].main.humidity + '%')
+
+                $('#five-day-forecast-header3').text(dayjs(fiveDayForecastData.list[26].dt_txt).format('MM/DD/YYYY'))
+                $('#five-day-forecast-temp3').text('Temperature: '+ fiveDayForecastData.list[26].main.temp + ' F°')
+                $('#five-day-forecast-wind3').text('Wind: ' + fiveDayForecastData.list[26].wind.speed + ' MPH')
+                $('#five-day-forecast-humidity3').text('Humidity: ' + fiveDayForecastData.list[26].main.humidity + '%')
+
+                $('#five-day-forecast-header4').text(dayjs(fiveDayForecastData.list[34].dt_txt).format('MM/DD/YYYY'))
+                $('#five-day-forecast-temp4').text('Temperature: '+ fiveDayForecastData.list[34].main.temp + ' F°')
+                $('#five-day-forecast-wind4').text('Wind: ' + fiveDayForecastData.list[34].wind.speed + ' MPH')
+                $('#five-day-forecast-humidity4').text('Humidity: ' + fiveDayForecastData.list[34].main.humidity + '%')
+
             })
     }
 
