@@ -2,58 +2,60 @@ const APIKey = '9ecd32ab11a8da67215f420ae16fd52d';
 
 $(document).ready(function () {
 
-    function displayCurrentWeatherCard () {
-        $('#card').addClass('card mx-2')
-        $('#current-weather-header').addClass('card-header')
-        $('#card-body').addClass('card-body')
-        $('#ul-list').addClass('list-group list-group-flush')
-        $('#temp').addClass("list-group-item")
-        $('#wind').addClass("list-group-item")
-        $('#humidity').addClass("list-group-item")
+    function createCard() {
+        var card = $('<div>').addClass('card mx-2');
+        var h5 = $('<h5>').addClass('card-header');
+        card.append(h5);
+        var cardBody = $('<div>').addClass('card-body');
+        card.append(cardBody);
+        var ulList = $('<ul>').addClass('list-group list-group-flush');
+        var olTemp = $('<ol>').addClass('list-group-item temp');
+        var olWind = $('<ol>').addClass('list-group-item wind');
+        var olHumidity = $('<ol>').addClass('list-group-item humidity');
+
+        ulList.append(olTemp);
+        ulList.append(olWind);
+        ulList.append(olHumidity);
+        cardBody.append(ulList);
+
+        return card;
     }
 
-    function displayFiveDayForecastCard() {
-        $('#five-day-forecast-card').addClass('card mx-2');
-        $('#five-day-forecast-header').addClass('card-header');
-        $('#five-day-card-body').addClass('card-body');
-        $('#ul-list-five-day').addClass('list-group list-group-flush');
-        $('#five-day-forecast-temp').addClass("list-group-item");
-        $('#five-day-forecast-wind').addClass("list-group-item");
-        $('#five-day-forecast-humidity').addClass("list-group-item");
+    var currentWeatherCard;
 
-        $('#five-day-forecast-card1').addClass('card mx-2');
-        $('#five-day-forecast-header1').addClass('card-header');
-        $('#five-day-card-body1').addClass('card-body');
-        $('#ul-list-five-day1').addClass('list-group list-group-flush');
-        $('#five-day-forecast-temp1').addClass("list-group-item");
-        $('#five-day-forecast-wind1').addClass("list-group-item");
-        $('#five-day-forecast-humidity1').addClass("list-group-item");
-
-        $('#five-day-forecast-card2').addClass('card mx-2');
-        $('#five-day-forecast-header2').addClass('card-header');
-        $('#five-day-card-body2').addClass('card-body');
-        $('#ul-list-five-day2').addClass('list-group list-group-flush');
-        $('#five-day-forecast-temp2').addClass("list-group-item");
-        $('#five-day-forecast-wind2').addClass("list-group-item");
-        $('#five-day-forecast-humidity2').addClass("list-group-item");
-
-        $('#five-day-forecast-card3').addClass('card mx-2');
-        $('#five-day-forecast-header3').addClass('card-header');
-        $('#five-day-card-body3').addClass('card-body');
-        $('#ul-list-five-day3').addClass('list-group list-group-flush');
-        $('#five-day-forecast-temp3').addClass("list-group-item");
-        $('#five-day-forecast-wind3').addClass("list-group-item");
-        $('#five-day-forecast-humidity3').addClass("list-group-item");
-        
-        $('#five-day-forecast-card4').addClass('card mx-2');
-        $('#five-day-forecast-header4').addClass('card-header');
-        $('#five-day-card-body4').addClass('card-body');
-        $('#ul-list-five-day4').addClass('list-group list-group-flush');
-        $('#five-day-forecast-temp4').addClass("list-group-item");
-        $('#five-day-forecast-wind4').addClass("list-group-item");
-        $('#five-day-forecast-humidity4').addClass("list-group-item");
+    function displayCurrentWeatherCard(data) {
+        // Check if the card already exists
+        if (!currentWeatherCard) {
+            // If it doesn't exist, create a new card
+            currentWeatherCard = createCard();
+            $('.current-weather-section').append(currentWeatherCard);
+        }
+        $('.card-header', currentWeatherCard).text(data.name + dayjs().format(' MM/DD/YYYY'));
+        $('.temp', currentWeatherCard).text('Temperature: ' + data.main.temp + ' F°');
+        $('.wind', currentWeatherCard).text('Wind: ' + data.wind.speed + ' MPH');
+        $('.humidity', currentWeatherCard).text('Humidity: ' + data.main.humidity + '%');
+        $('.current-weather-section').append(currentWeatherCard);
     }
-    
+
+    function displayFiveDayForecastCard(data) {
+        const indices = [2, 8, 16, 24, 32];
+
+        // Clear existing content of forecast cards
+        $('.forecast-card-1, .forecast-card-2, .forecast-card-3, .forecast-card-4, .forecast-card-5').empty();
+
+        for (var i = 0; i < indices.length; i++) {
+            var forecastCard = createCard(); // create a new forecast card instance
+            const index = indices[i];
+
+            $('.card-header', forecastCard).text(dayjs(data.list[index].dt_txt).format('MM/DD/YYYY'));
+            $('.temp', forecastCard).text('Temperature: ' + data.list[index].main.temp + ' F°');
+            $('.wind', forecastCard).text('Wind: ' + data.list[index].wind.speed + ' MPH');
+            $('.humidity', forecastCard).text('Humidity: ' + data.list[index].main.humidity + '%');
+
+            // append the forecast card to the corresponding element
+            $('.forecast-card-' + (i + 1)).append(forecastCard);
+        }
+    }
 
     function getAPI(city) {
         const requestCurrentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
@@ -65,12 +67,8 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (currentWeatherData) {
-                
-                displayCurrentWeatherCard()
-                $('#current-weather-header').text(currentWeatherData.name + dayjs().format(' MM/DD/YYYY'))
-                $('#temp').text('Temperature: ' + currentWeatherData.main.temp + ' F°')
-                $('#wind').text('Wind: ' + currentWeatherData.wind.speed + ' MPH')
-                $('#humidity').text('Humidity: ' + currentWeatherData.main.humidity + '%')
+
+                displayCurrentWeatherCard(currentWeatherData)
 
                 //Fetch five-day forecast data
                 return fetch(requestFiveDayForecastUrl)
@@ -80,33 +78,7 @@ $(document).ready(function () {
             })
             .then(function (fiveDayForecastData) {
 
-                displayFiveDayForecastCard()
-                console.log(fiveDayForecastData)
-                $('#five-day-forecast-header').text(dayjs(fiveDayForecastData.list[2].dt_txt).format('MM/DD/YYYY'))
-                $('#five-day-forecast-temp').text('Temperature: '+ fiveDayForecastData.list[2].main.temp + ' F°')
-                $('#five-day-forecast-wind').text('Wind: ' + fiveDayForecastData.list[2].wind.speed + ' MPH')
-                $('#five-day-forecast-humidity').text('Humidity: ' + fiveDayForecastData.list[2].main.humidity + '%')
-
-                $('#five-day-forecast-header1').text(dayjs(fiveDayForecastData.list[10].dt_txt).format('MM/DD/YYYY'))
-                $('#five-day-forecast-temp1').text('Temperature: '+ fiveDayForecastData.list[10].main.temp + ' F°')
-                $('#five-day-forecast-wind1').text('Wind: ' + fiveDayForecastData.list[10].wind.speed + ' MPH')
-                $('#five-day-forecast-humidity1').text('Humidity: ' + fiveDayForecastData.list[10].main.humidity + '%')
-
-                $('#five-day-forecast-header2').text(dayjs(fiveDayForecastData.list[18].dt_txt).format('MM/DD/YYYY'))
-                $('#five-day-forecast-temp2').text('Temperature: '+ fiveDayForecastData.list[18].main.temp + ' F°')
-                $('#five-day-forecast-wind2').text('Wind: ' + fiveDayForecastData.list[18].wind.speed + ' MPH')
-                $('#five-day-forecast-humidity2').text('Humidity: ' + fiveDayForecastData.list[18].main.humidity + '%')
-
-                $('#five-day-forecast-header3').text(dayjs(fiveDayForecastData.list[26].dt_txt).format('MM/DD/YYYY'))
-                $('#five-day-forecast-temp3').text('Temperature: '+ fiveDayForecastData.list[26].main.temp + ' F°')
-                $('#five-day-forecast-wind3').text('Wind: ' + fiveDayForecastData.list[26].wind.speed + ' MPH')
-                $('#five-day-forecast-humidity3').text('Humidity: ' + fiveDayForecastData.list[26].main.humidity + '%')
-
-                $('#five-day-forecast-header4').text(dayjs(fiveDayForecastData.list[34].dt_txt).format('MM/DD/YYYY'))
-                $('#five-day-forecast-temp4').text('Temperature: '+ fiveDayForecastData.list[34].main.temp + ' F°')
-                $('#five-day-forecast-wind4').text('Wind: ' + fiveDayForecastData.list[34].wind.speed + ' MPH')
-                $('#five-day-forecast-humidity4').text('Humidity: ' + fiveDayForecastData.list[34].main.humidity + '%')
-
+                displayFiveDayForecastCard(fiveDayForecastData)
             })
     }
 
