@@ -19,7 +19,7 @@ header p {
     color: #ecf0f1;
 }
 
-#card {
+/* .card {
     width: 300px;
     margin: 20px auto;
     border: 1px solid #ddd;
@@ -28,11 +28,11 @@ header p {
     transition: transform 0.3s ease-in-out;
 }
 
-#card:hover {
+.card:hover {
     transform: scale(1.05);
 }
 
-#cityName {
+.card-header {
     background-color: #007BFF;
     color: white;
     padding: 10px;
@@ -41,7 +41,7 @@ header p {
     margin: 0;
 }
 
-#card-body {
+.card-body {
     padding: 15px;
 }
 
@@ -61,4 +61,4 @@ header p {
 
 .list-group-item:hover {
     background-color: #e9ecef;
-}
+} */
