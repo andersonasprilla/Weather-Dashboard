@@ -9,6 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
@@ -42,14 +47,13 @@
         </section>
         <section class="px-4 mx-2">
             <div class="card mx-2">
-                <h5 class="card-header">
-                    Atlanta (9/13/2022)
+                <h5 class="card-header" id="cityName">
                 </h5>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" id="temp"></li>
-                        <li class="list-group-item" id="wind">Wind: 8.43 MPH</li>
-                        <li class="list-group-item" id="humidity">Humidity: 44% </li>
+                        <li class="list-group-item" id="wind"></li>
+                        <li class="list-group-item" id="humidity"></li>
                     </ul>
                 </div>
             </div>
