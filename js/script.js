@@ -7,16 +7,21 @@ $(document).ready(function () {
         $('#current-weather-header').addClass('card-header')
         $('#card-body').addClass('card-body')
         $('#ul-list').addClass('list-group list-group-flush')
-        $('temp').addClass("list-group-item")
-        $('wind').addClass("list-group-item")
-        $('humidity').addClass("list-group-item")
+        $('#temp').addClass("list-group-item")
+        $('#wind').addClass("list-group-item")
+        $('#humidity').addClass("list-group-item")
     }
 
     function displayFiveDayForecastCard() {
-        for(var i = 0; i < 5; i++){
-            displayCurrentWeatherCard()
-        }
+        $('#five-day-forecast-card').addClass('card mx-2');
+        $('#five-day-forecast-header').addClass('card-header');
+        $('#five-day-card-body').addClass('card-body');
+        $('#ul-list-five-day').addClass('list-group list-group-flush');
+        $('#five-day-forecast-temp').addClass("list-group-item");
+        $('#five-day-forecast-wind').addClass("list-group-item");
+        $('#five-day-forecast-humidity').addClass("list-group-item");
     }
+    
 
     function getAPI(city) {
         const requestCurrentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
@@ -28,6 +33,7 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (currentWeatherData) {
+                
                 displayCurrentWeatherCard()
                 $('#current-weather-header').text(currentWeatherData.name + dayjs().format(' MM/DD/YYYY'))
                 $('#temp').text('Temperature: ' + currentWeatherData.main.temp + ' F°')
@@ -41,7 +47,9 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (fiveDayForecastData) {
-                console.log(fiveDayForecastData)
+
+                displayFiveDayForecastCard()
+                
                 $('#five-day-forecast-header').text(dayjs(fiveDayForecastData.list[2].dt_txt).format('MM/DD/YYYY'))
                 $('#five-day-forecast-temp').text('Temperature: '+ fiveDayForecastData.list[2].main.temp + ' F°')
                 $('#five-day-forecast-wind').text('Wind: ' + fiveDayForecastData.list[2].wind.speed + ' MPH')
