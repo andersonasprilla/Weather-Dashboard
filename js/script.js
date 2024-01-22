@@ -24,8 +24,26 @@ $(document).ready(function () {
 $('#atlantaBtn').on('click', function(){
     getAPI('Atlanta');
 })
-
-
-
+$('#denverBtn').on('click', function(){
+    getAPI('Denver');
+})
+$('#seattleBtn').on('click', function(){
+    getAPI('Seattle');
+})
+$('#sanFranciscoBtn').on('click', function(){
+    getAPI('San Francisco');
+})
+$('#orlandoBtn').on('click', function(){
+    getAPI('Orlando');
+})
+$('#newYorkBtn').on('click', function(){
+    getAPI('New York');
+})
+$('#chicagoBtn').on('click', function(){
+    getAPI('Chicago');
+})
+$('#austinBtn').on('click', function(){
+    getAPI('Austin');
+})
 });
 
