@@ -9,10 +9,11 @@ $(document).ready(function () {
         var cardBody = $('<div>').addClass('card-body');
         card.append(cardBody);
         var ulList = $('<ul>').addClass('list-group list-group-flush');
+        var weatherIcon = $('<img>').addClass('weather-icon mx-auto')
         var olTemp = $('<ol>').addClass('list-group-item temp');
         var olWind = $('<ol>').addClass('list-group-item wind');
         var olHumidity = $('<ol>').addClass('list-group-item humidity');
-
+        ulList.append(weatherIcon)
         ulList.append(olTemp);
         ulList.append(olWind);
         ulList.append(olHumidity);
@@ -20,7 +21,7 @@ $(document).ready(function () {
 
         return card;
     }
-
+    
     var currentWeatherCard;
 
     function displayCurrentWeatherCard(data) {
@@ -30,6 +31,8 @@ $(document).ready(function () {
             currentWeatherCard = createCard();
             $('.current-weather-section').append(currentWeatherCard);
         }
+        
+        $('.weather-icon', currentWeatherCard).attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
         $('.card-header', currentWeatherCard).text(data.name + dayjs().format(' MM/DD/YYYY'));
         $('.temp', currentWeatherCard).text('Temperature: ' + data.main.temp + ' F°');
         $('.wind', currentWeatherCard).text('Wind: ' + data.wind.speed + ' MPH');
@@ -48,6 +51,7 @@ $(document).ready(function () {
             const index = indices[i];
 
             $('.card-header', forecastCard).text(dayjs(data.list[index].dt_txt).format('MM/DD/YYYY'));
+            $('.weather-icon', forecastCard).attr('src', `https://openweathermap.org/img/wn/${data.list[index].weather[0].icon}@2x.png`)
             $('.temp', forecastCard).text('Temperature: ' + data.list[index].main.temp + ' F°');
             $('.wind', forecastCard).text('Wind: ' + data.list[index].wind.speed + ' MPH');
             $('.humidity', forecastCard).text('Humidity: ' + data.list[index].main.humidity + '%');
@@ -67,7 +71,7 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (currentWeatherData) {
-
+                
                 displayCurrentWeatherCard(currentWeatherData)
 
                 //Fetch five-day forecast data
@@ -77,7 +81,7 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (fiveDayForecastData) {
-
+                console.log(fiveDayForecastData)
                 displayFiveDayForecastCard(fiveDayForecastData)
             })
     }
