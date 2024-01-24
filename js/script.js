@@ -66,7 +66,7 @@ $(document).ready(function () {
             $('.forecast-card-' + (i + 1)).append(forecastCard);
         }
     }
-
+    
     function getAPI(city) {
         const requestCurrentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
         const requestFiveDayForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
@@ -76,10 +76,8 @@ $(document).ready(function () {
             .then(function (response) {
                 return response.json()
             })
-            .then(function (currentWeatherData) {
-                
+            .then(function (currentWeatherData) {   
                 displayCurrentWeatherCard(currentWeatherData)
-
                 //Fetch five-day forecast data
                 return fetch(requestFiveDayForecastUrl)
             })
@@ -87,7 +85,6 @@ $(document).ready(function () {
                 return response.json()
             })
             .then(function (fiveDayForecastData) {
-                console.log(fiveDayForecastData)
                 displayFiveDayForecastCard(fiveDayForecastData)
             })
     }

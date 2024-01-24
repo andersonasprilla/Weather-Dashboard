@@ -35,7 +35,7 @@ header p {
 
 .card-header {
     text-align: center;
-    background-color: #3498db;
+    background-color: #68708d;
     color: #fff;
     padding: 10px;
     border-top-left-radius: 10px;
@@ -44,6 +44,7 @@ header p {
 
 .card-body {
     padding: 15px;
+    background-color: #b9bcca;
 }
 
 .list-group-item {
@@ -78,7 +79,7 @@ header p {
 }
 
 #searchForm button {
-    background-color: #3498db;
+    background-color: #21d19f;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -87,6 +88,6 @@ header p {
 }
 
 #searchForm button:hover {
-    background-color: #2980b9;
+    background-color: #276859;
 }
 
