@@ -2,6 +2,9 @@ const APIKey = '9ecd32ab11a8da67215f420ae16fd52d';
 
 $(document).ready(function () {
 
+    var forecastHeading = $('<h4>').addClass('mt-5 mx-2').text('5-Day Forecast');
+    var hrLine = $('<hr>').addClass('mx-2');
+
     function createCard() {
         var card = $('<div>').addClass('card mx-2');
         var h5 = $('<h5>').addClass('card-header');
@@ -42,6 +45,9 @@ $(document).ready(function () {
 
     function displayFiveDayForecastCard(data) {
         const indices = [2, 8, 16, 24, 32];
+
+        $('.five-day-forecast-title').append(forecastHeading)
+        $('.five-day-forecast-title').append(hrLine)
 
         // Clear existing content of forecast cards
         $('.forecast-card-1, .forecast-card-2, .forecast-card-3, .forecast-card-4, .forecast-card-5').empty();
