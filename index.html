@@ -25,22 +25,14 @@
             <form id="searchForm">
                 <div class="d-flex flex-column">
                     <h3>Search for a City</h3>
-                    <input form="searchForm" class="form-control me-2 mb-2" type="search" placeholder="San Diego"
+                    <input id="searchInput" class="form-control me-2 mb-2" type="search" placeholder="Search"
                         aria-label="Search">
                     <button form="searchForm" class="btn btn-outline-success mb-2" type="submit">Search</button>
                 </div>
             </form>
             <hr>
-            <div class="d-flex flex-column ">
-                <button class="btn btn-secondary mb-2" id="atlantaBtn">Atlanta</button>
-                <button class="btn btn-secondary mb-2" id="denverBtn">Denver</button>
-                <button class="btn btn-secondary mb-2" id="seattleBtn">Seattle</button>
-                <button class="btn btn-secondary mb-2" id="sanFranciscoBtn">San Francisco</button>
-                <button class="btn btn-secondary mb-2" id="orlandoBtn">Orlando</button>
-                <button class="btn btn-secondary mb-2" id="newYorkBtn">New York</button>
-                <button class="btn btn-secondary mb-2" id="chicagoBtn">Chicago</button>
-                <button class="btn btn-secondary mb-2" id="austinBtn">Austin</button>
-            </div>
+            <!-- List of Buttons -->
+            <div class="d-flex flex-column city-buttons"></div>
         </section>
         <section class=" px-4 mx-2">
             <!-- Current Weather Card -->

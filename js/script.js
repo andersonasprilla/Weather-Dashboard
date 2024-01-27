@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     var forecastHeading = $('<h4>').addClass('mt-5 mx-2').text('5-Day Forecast');
     var hrLine = $('<hr>').addClass('mx-2');
+    var currentWeatherCard;
 
     function createCard() {
         var card = $('<div>').addClass('card mx-2');
@@ -24,8 +25,6 @@ $(document).ready(function () {
 
         return card;
     }
-    
-    var currentWeatherCard;
 
     function displayCurrentWeatherCard(data) {
         // Check if the card already exists
@@ -34,9 +33,9 @@ $(document).ready(function () {
             currentWeatherCard = createCard();
             $('.current-weather-section').append(currentWeatherCard);
         }
-        
-        $('.weather-icon', currentWeatherCard).attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+
         $('.card-header', currentWeatherCard).text(data.name + dayjs().format(' MM/DD/YYYY'));
+        $('.weather-icon', currentWeatherCard).attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
         $('.temp', currentWeatherCard).text('Temperature: ' + data.main.temp + ' F°');
         $('.wind', currentWeatherCard).text('Wind: ' + data.wind.speed + ' MPH');
         $('.humidity', currentWeatherCard).text('Humidity: ' + data.main.humidity + '%');
@@ -66,7 +65,7 @@ $(document).ready(function () {
             $('.forecast-card-' + (i + 1)).append(forecastCard);
         }
     }
-    
+
     function getAPI(city) {
         const requestCurrentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
         const requestFiveDayForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
@@ -76,7 +75,7 @@ $(document).ready(function () {
             .then(function (response) {
                 return response.json()
             })
-            .then(function (currentWeatherData) {   
+            .then(function (currentWeatherData) {
                 displayCurrentWeatherCard(currentWeatherData)
                 //Fetch five-day forecast data
                 return fetch(requestFiveDayForecastUrl)
@@ -89,30 +88,37 @@ $(document).ready(function () {
             })
     }
 
-    //Call API when clicking button
-    $('#atlantaBtn').on('click', function () {
-        getAPI('Atlanta');
-    })
-    $('#denverBtn').on('click', function () {
-        getAPI('Denver');
-    })
-    $('#seattleBtn').on('click', function () {
-        getAPI('Seattle');
-    })
-    $('#sanFranciscoBtn').on('click', function () {
-        getAPI('San Francisco');
-    })
-    $('#orlandoBtn').on('click', function () {
-        getAPI('Orlando');
-    })
-    $('#newYorkBtn').on('click', function () {
-        getAPI('New York');
-    })
-    $('#chicagoBtn').on('click', function () {
-        getAPI('Chicago');
-    })
-    $('#austinBtn').on('click', function () {
-        getAPI('Austin');
-    })
+    var formEL = $('#searchForm');
+    var inputEl = $('#searchInput');
+
+    function searchHandler(event) {
+        event.preventDefault();
+        var inputCity = inputEl.val();
+
+
+        // Store the array in local storage after converting it to a JSON string
+        localStorage.setItem('searchItem', JSON.stringify(inputCity));
+
+        // Clear the input field
+        inputEl.val('');
+
+        getAPI(inputCity);
+        createButton(inputCity)
+    }
+
+    formEL.on('submit', searchHandler);
+
+    $('.city-buttons').on('click', 'button', function () {
+        var city = $(this).text();
+        getAPI(city);
+    });
+   
 });
+
+function createButton(city) {
+    var listButtons = $('.city-buttons')
+    city = JSON.parse(localStorage.getItem('searchItem'))
+    var button = $('<button>').addClass('btn btn-secondary mb-2').text(city)
+    listButtons.append(button)
+}
 
