@@ -97,6 +97,20 @@ $(document).ready(function () {
             })
     }
 
+    // Function to load buttons from local storage
+    function loadButtonsFromLocalStorage() {
+        var listButtons = $('.city-buttons');
+        var storedCities = JSON.parse(localStorage.getItem('searchItems')) || [];
+
+        storedCities.forEach(function (city) {
+            createButton(city);
+        });
+    }
+
+    // Call the function to load buttons when the page is ready
+    loadButtonsFromLocalStorage();
+
+
     // Form submission handler
     var formEL = $('#searchForm');
     var inputEl = $('#searchInput');
@@ -106,15 +120,18 @@ $(document).ready(function () {
         var inputCity = inputEl.val();
 
         // Store the array in local storage after converting it to a JSON string
-        localStorage.setItem('searchItem', JSON.stringify(inputCity));
+        var storedCities = JSON.parse(localStorage.getItem('searchItems')) || [];
+        storedCities.push(inputCity);
+        localStorage.setItem('searchItems', JSON.stringify(storedCities));
 
         // Clear the input field
         inputEl.val('');
 
         // Make API request and create a button
         getAPI(inputCity);
-        createButton(inputCity)
+        createButton(inputCity);
     }
+
 
     // Attach form submission handler
     formEL.on('submit', searchHandler);
@@ -128,8 +145,7 @@ $(document).ready(function () {
 
 // Function to create a button and append it to the list of buttons
 function createButton(city) {
-    var listButtons = $('.city-buttons')
-    city = JSON.parse(localStorage.getItem('searchItem'))
-    var button = $('<button>').addClass('btn btn-secondary mb-2').text(city)
-    listButtons.append(button)
+    var listButtons = $('.city-buttons');
+    var button = $('<button>').addClass('btn btn-secondary mb-2').text(city);
+    listButtons.append(button);
 }
