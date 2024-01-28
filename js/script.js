@@ -119,19 +119,24 @@ $(document).ready(function () {
         event.preventDefault();
         var inputCity = inputEl.val();
 
-        // Store the array in local storage after converting it to a JSON string
-        var storedCities = JSON.parse(localStorage.getItem('searchItems')) || [];
-        storedCities.push(inputCity);
-        localStorage.setItem('searchItems', JSON.stringify(storedCities));
+        if (!inputCity) {
+            return
+        } else {
+            // Store the array in local storage after converting it to a JSON string
+            var storedCities = JSON.parse(localStorage.getItem('searchItems')) || [];
+            storedCities.push(inputCity);
+            localStorage.setItem('searchItems', JSON.stringify(storedCities));
 
-        // Clear the input field
-        inputEl.val('');
+            // Clear the input field
+            inputEl.val('');
 
-        // Make API request and create a button
-        getAPI(inputCity);
-        createButton(inputCity);
+            // Make API request and create a button
+            getAPI(inputCity);
+            createButton(inputCity);
+        }
+
+
     }
-
 
     // Attach form submission handler
     formEL.on('submit', searchHandler);
