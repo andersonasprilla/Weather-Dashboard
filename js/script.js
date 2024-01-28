@@ -40,7 +40,7 @@ $(document).ready(function () {
         // Populate card with current weather data
         $('.card-header', currentWeatherCard).text(data.name + dayjs().format(' MM/DD/YYYY'));
         $('.weather-icon', currentWeatherCard).attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
-        $('.temp', currentWeatherCard).text('Temperature: ' + data.main.temp + ' F°');
+        $('.temp', currentWeatherCard).text('Temp: ' + data.main.temp + ' F°');
         $('.wind', currentWeatherCard).text('Wind: ' + data.wind.speed + ' MPH');
         $('.humidity', currentWeatherCard).text('Humidity: ' + data.main.humidity + '%');
         $('.current-weather-section').append(currentWeatherCard);
@@ -65,7 +65,7 @@ $(document).ready(function () {
             // Populate forecast card with data
             $('.card-header', forecastCard).text(dayjs(data.list[index].dt_txt).format('MM/DD/YYYY'));
             $('.weather-icon', forecastCard).attr('src', `https://openweathermap.org/img/wn/${data.list[index].weather[0].icon}@2x.png`)
-            $('.temp', forecastCard).text('Temperature: ' + data.list[index].main.temp + ' F°');
+            $('.temp', forecastCard).text('Temp: ' + data.list[index].main.temp + ' F°');
             $('.wind', forecastCard).text('Wind: ' + data.list[index].wind.speed + ' MPH');
             $('.humidity', forecastCard).text('Humidity: ' + data.list[index].main.humidity + '%');
 
@@ -118,7 +118,6 @@ $(document).ready(function () {
     function searchHandler(event) {
         event.preventDefault();
         var inputCity = inputEl.val();
-
         if (!inputCity) {
             return
         } else {
@@ -134,8 +133,6 @@ $(document).ready(function () {
             getAPI(inputCity);
             createButton(inputCity);
         }
-
-
     }
 
     // Attach form submission handler
