@@ -95,6 +95,9 @@ $(document).ready(function () {
             .then(function (fiveDayForecastData) {
                 displayFiveDayForecastCard(fiveDayForecastData)
             })
+            .catch(function (error) {
+                console.error('API request error', error)
+            })
     }
 
     // Function to load buttons from local storage
