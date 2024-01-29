@@ -1,5 +1,10 @@
 # Weather Dashboard Readme
 
+[Live Weather Dashboard Link](https://andersonasprilla.github.io/Weather-Dashboard/)
+
+
+
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
@@ -44,6 +49,7 @@ Contributions to the Weather Dashboard are encouraged. If you encounter any issu
 
 ## License
 This project is licensed under the MIT License. You are free to use, modify, and distribute the code in accordance with the terms specified in the license.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 - Feel free to modify or extend this template according to your specific needs.

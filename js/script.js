@@ -99,7 +99,6 @@ $(document).ready(function () {
 
     // Function to load buttons from local storage
     function loadButtonsFromLocalStorage() {
-        var listButtons = $('.city-buttons');
         var storedCities = JSON.parse(localStorage.getItem('searchItems')) || [];
 
         storedCities.forEach(function (city) {
