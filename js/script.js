@@ -74,10 +74,21 @@ $(document).ready(function () {
         }
     }
 
+    function showLoadingSpinner () {
+        $('#loadingSpinner').show()
+    }
+
+    function hideLoadingSpinner () {
+        $('#loadingSpinner').hide()
+    }
+
     // Function to make API requests and update UI
     function getAPI(city) {
         const requestCurrentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`;
         const requestFiveDayForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`
+
+        // Show loading spinner
+        showLoadingSpinner();
 
         // Fetch current weather data
         fetch(requestCurrentWeatherUrl)
@@ -97,6 +108,8 @@ $(document).ready(function () {
             })
             .catch(function (error) {
                 console.error('API request error', error)
+            }).finally(function () {
+                hideLoadingSpinner()
             })
     }
 
